@@ -1,3 +1,4 @@
+let markAsRead = 1;
 const loadForums = async () =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
     const data = await res.json();
@@ -12,13 +13,13 @@ const loadForums = async () =>{
         
         div.innerHTML = `
         <div class="indicator">
-                <span class="indicator-item badge badge-secondary bg-red-500"></span> 
+                <span id="indicator" class="indicator-item badge badge-secondary ${forum.isActive?"bg-red-500":"bg-green-500"}"></span> 
                 <img class="w-20 h-20 rounded-xl" src="${forum.image}" alt="">
             </div>
             <div class="space-y-2">
                 <div>
                 <p class="text-xs font-semibold text-[#12132DCC]">
-                    <span class="mr-3 ">#${forum.category}</span> <span>Author: ${forum.author?.name}</span>
+                    <span class="mr-3 ">#${forum.category}</span> <span>Author: ${forum.author.name}</span>
                 </p>
                 </div>
                 <h4 class="forum-title text-2xl font-bold text-[#12132D]">${forum.title} </h4>
@@ -41,7 +42,7 @@ const loadForums = async () =>{
                 </span>
             </div>
 
-            <button onclick="buttonClick('${forum.title}', '${forum.view_count}')" class="btn-clicked"><img src="images/email.png" alt=""></button>
+            <button onclick="buttonClick('${forum.title.replace(/'./g,' ')}', '${forum.view_count}')" ><img src="images/email.png" alt=""></button>
 
          </div>
             </div>
@@ -53,14 +54,23 @@ const loadForums = async () =>{
     });
 
 };
+
+
 const selectedForumsContainer= document.getElementById('selected-forums-container');
 const div = document.createElement('div');
-div.innerText= 'I love'
+div.innerHTML = `<div class="flex flex-between gap-[210px] lg:gap-80">
+    <p class="text-2xl font-bold">Title</p>
+    <p>Mark as read (<span id="mark-read">0</span>)</p>
+</div>`;
 selectedForumsContainer.appendChild(div)
 
 
 const buttonClick = (title,view) =>{
-    // const selectedForumsContainer= document.getElementById('selected-forums-container');
+   
+    const setInnerText = document.getElementById('mark-read').innerText= markAsRead;
+    
+    markAsRead ++;
+   
     const div = document.createElement('div');
     const div2 = document.createElement('div')
     const div3 = document.createElement('div')
@@ -72,7 +82,8 @@ const buttonClick = (title,view) =>{
     div.appendChild(div4);
     div.appendChild(div3);
     selectedForumsContainer.appendChild(div)
-    div.className='flex gap-8 items-center bg-white rounded-lg my-5 p-4'
+    div.className='flex gap-8 items-center bg-white rounded-lg my-5 p-4 text-xl'
+    
 
 }
 
