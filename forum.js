@@ -92,13 +92,33 @@ const loadLatestPosts = async () =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`);
     const data = await res.json();
     const posts = data;
-    console.log(posts);
-
+    
     // accessing every post
+    const latestPostsContainer = document.getElementById('latest-posts-container');
     posts.forEach(post =>{
-        console.log(post);
-    })
-}
+        const div = document.createElement('div');
+        div.className='card  bg-white shadow-xl'
+        div.innerHTML = `
+        <figure class="p-4 lg:pt-8"><img class="rounded-lg"
+        src="${post.cover_image}" alt="Shoes" />
+</figure>
+<div class="card-body space-y-2">
+    <h3 class="flex gap-5 text-[#12132D99] text-xl"><span><img src="images/date.png" alt=""></span>
+        <span>${post?.author?.posted_date|| 'No publish date'}</span>
+    </h3>
+    <h2 class="card-title text-lg lg:text-2xl font-extrabold">${post.title}</h2>
+    <p class="text-[#12132D99] text-lg lg:text-xl">${post.description}</p>
+    <div class="flex gap-3">
+        <img class="w-11 rounded-full" src="${post.profile_image}" alt="">
+        <div>
+            <p class="text-lg font-bold text-black">${post.author?.name}</p>
+            <p class="text-sm text-[#12132D99]">${post.author?.designation||'Unknown'}</p>
+        </div>
+        
+        `;
+        latestPostsContainer.appendChild(div);
+    });
+};
 
 loadLatestPosts()
 loadForums()
