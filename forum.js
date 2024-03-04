@@ -1,10 +1,11 @@
 let markAsRead = 1;
 // lets discussion section``
-const loadForums = async () =>{
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`);
+
+const loadForums = async (searchText='&coding&comedy&music') =>{
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data = await res.json();
     const forums = data.posts;
-    //  
+    displayForums(forums);
 
     const forumsContainer = document.getElementById('forums-container');
     forums.forEach(forum =>{
@@ -120,5 +121,28 @@ const loadLatestPosts = async () =>{
     });
 };
 
+const displayForums = (forums) => {
+    const forumContainer = document.getElementById('forums-container');
+    forumContainer.textContent = ' ';
+}
+
+// handle search button
+ const handleSearch = () =>{
+    // console.log('clicked')
+    const searchField = document.getElementById('input-field');
+    const searchText = searchField.value;
+    // console.log(searchText)
+    loadForums(searchText);
+    // searchText= ' ';
+ }
+
+  // default allforums view
+  const loadAllForums = async()=>{
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`)
+    const data = await res.json();
+    const forums = data.posts;
+}
+
+ 
 loadLatestPosts()
 loadForums()

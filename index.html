@@ -35,27 +35,39 @@
         </nav>
 
         <!-- banner section -->
-        <div class="bg-[#12132D] rounded-xl" style="background-image: url(images/bgbanner.png);">
+        <div class="bg-[#12132D] rounded-xl my-6"
+            style="background-image: url(images/bgbanner.png); background-position: bottom;background-repeat: no-repeat; background-size: 100%;">
             <div class=" bg-opacity-60"></div>
             <div class="hero-content text-center text-neutral-content">
-                <div class="flex flex-col lg:flex-row">
-                    <div>
-                        <h2 class="text-4xl lg:text-6xl text-white font-extrabold text-left">Welcome to the <br> <span
-                                class="text-blue-600">ReTro </span>
+                <div class="flex flex-col lg:flex-row gap-8 lg:m-14">
+                    <div class="space-y-3">
+                        <h2 class="text-4xl lg:text-6xl text-white font-extrabold lg:text-left">Welcome to the <br>
+                            <span class="text-blue-600">ReTro </span>
                             Forum
                         </h2>
                         <p>Share your favorite opinion and win and wp forum coffee mug!</p>
-                        <label class="input input-bordered flex items-center gap-2">
-                            <input type="text" class="grow" placeholder="Search" />
-                            <span class="badge badge-info">Optional</span>
+                        <label class="input input-bordered flex items-center ">
+                            <input id="input-field" type="text" class="grow" placeholder="Search here anything" />
+                            <button onclick="handleSearch()"
+                                class="btn btn-active btn-primary bg-blue-500 text-white">Sign
+                                In</button>
                         </label>
                     </div>
-                    <div class="bg-white text-black">
-                        <div>
-                            <li>Registered Users</li>
-                            <li>Forum</li>
-                            <li>Topics</li>
-                            <li>Replies</li>
+                    <div class="flex justify-center ">
+                        <div
+                            class="bg-white text-black text-xl font-semibold p-5 flex gap-4 justify-center items-center max-w-96 rounded-lg">
+                            <div class="text-left">
+                                <p>Registered Users</p>
+                                <p>Forum</p>
+                                <p>Topics</p>
+                                <p>Replies</p>
+                            </div>
+                            <div>
+                                <p>1</p>
+                                <p>2</p>
+                                <p>3</p>
+                                <p>4</p>
+                            </div>
                         </div>
                     </div>
                 </div>
