@@ -15,7 +15,7 @@ const loadForums = async () =>{
         div.innerHTML = `
         <div class="indicator">
                 <span id="indicator" class="indicator-item badge badge-secondary ${forum.isActive?"bg-red-500":"bg-green-500"}"></span> 
-                <img class="w-20 h-20 rounded-xl" src="${forum.image}" alt="">
+                <img class="w-16 h-16 rounded-xl" src="${forum.image}" alt="">
             </div>
             <div class="space-y-2">
                 <div>
