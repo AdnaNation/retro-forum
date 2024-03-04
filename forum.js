@@ -2,12 +2,15 @@ let markAsRead = 1;
 // lets discussion section``
 
 const loadForums = async (searchText='&coding&comedy&music') =>{
+    toggleloadSpinner(true);
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data = await res.json();
     const forums = data.posts;
     displayForums(forums);
+    toggleloadSpinner(true);
 
     const forumsContainer = document.getElementById('forums-container');
+    
     forums.forEach(forum =>{
         const div = document.createElement('div');
         //  console.log(forum)
@@ -55,6 +58,9 @@ const loadForums = async (searchText='&coding&comedy&music') =>{
       
     });
 
+    // hide loadingSpinner
+    toggleloadSpinner(false);
+
 };
 
 
@@ -62,13 +68,12 @@ const selectedForumsContainer= document.getElementById('selected-forums-containe
 const div = document.createElement('div');
 div.innerHTML = `<div class="flex flex-between gap-[210px] lg:gap-80">
     <p class="text-2xl font-bold">Title</p>
-    <p>Mark as read (<span id="mark-read">0</span>)</p>
+    <p class="font-bold">Mark as read (<span id="mark-read">0</span>)</p>
 </div>`;
 selectedForumsContainer.appendChild(div)
 
 
 const buttonClick = (title,view) =>{
-   
     const setInnerText = document.getElementById('mark-read').innerText= markAsRead;
     
     markAsRead ++;
@@ -84,7 +89,7 @@ const buttonClick = (title,view) =>{
     div.appendChild(div4);
     div.appendChild(div3);
     selectedForumsContainer.appendChild(div)
-    div.className='flex gap-8 items-center bg-white rounded-lg my-5 p-4 text-xl'
+    div.className='flex gap-8 items-center bg-white rounded-lg my-5 p-4 text-xl shadow-xl'
     
 
 }
@@ -136,13 +141,15 @@ const displayForums = (forums) => {
     // searchText= ' ';
  }
 
-  // default allforums view
-  const loadAllForums = async()=>{
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts`)
-    const data = await res.json();
-    const forums = data.posts;
-}
+ const toggleloadSpinner =(isLoading)=>{
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isLoading){
+       loadingSpinner.classList.remove('hidden');
+    }
+    else{
+        loadingSpinner.classList.add('hidden');
+    }
+ }
 
- 
 loadLatestPosts()
 loadForums()
